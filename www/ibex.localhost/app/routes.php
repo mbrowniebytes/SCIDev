@@ -5,6 +5,7 @@ use App\Application\Actions\Customer\ListCustomersAction;
 use App\Application\Actions\Customer\ListCustomerSalesAction;
 use App\Application\Actions\Customer\ViewCustomerAction;
 use App\Application\Actions\Customer\ViewCustomerSaleAction;
+use App\Application\Actions\Dashboard\ViewDashboardAction;
 use App\Application\Actions\Dealer\ListDealersAction;
 use App\Application\Actions\Dealer\ViewDealerAction;
 use App\Application\Actions\User\ListUsersAction;
@@ -15,10 +16,7 @@ use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 return function (App $app) {
-    $app->get('/', function (Request $request, Response $response) {
-        $response->getBody()->write('Hello world!');
-        return $response;
-    });
+    $app->get('/', ViewDashboardAction::class);
 
     $app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
         $name = $args['name'];
@@ -31,12 +29,12 @@ return function (App $app) {
         $group->get('/{id}', ViewUserAction::class);
     });
 
-    $app->group('/dealers', function (Group $group) {
+    $app->group('/api/dealers', function (Group $group) {
         $group->get('', ListDealersAction::class);
         $group->get('/{id}', ViewDealerAction::class);
     });
 
-    $app->group('/customers/{dealerId}', function (Group $group) {
+    $app->group('/api/customers/{dealerId}', function (Group $group) {
         $group->get('', ListCustomersAction::class);
         $group->get('/sales', ListCustomerSalesAction::class);
         $group->get('/{id}', ViewCustomerAction::class);
