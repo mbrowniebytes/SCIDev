@@ -87,6 +87,9 @@ sudo yum install vim
 sudo usermod -a -G vagrant nginx
 sudo vi /etc/selinux/config
 
+# reactjs
+sudo yum install npm nodejs
+sudo yum install yarn
 
 
 
