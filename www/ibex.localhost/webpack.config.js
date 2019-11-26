@@ -6,14 +6,16 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 let config = {
     entry: {
-        main: [
-            './src/Front/app.js',
-            './src/Front/css/app.css'
+        'bundle.css': [
+            path.resolve(__dirname, 'src/Front/css/app.css')
+        ],
+        'bundle.js': [
+            path.resolve(__dirname, 'src/Front/app.js')
         ]
     },
     output: {
-        path: path.resolve(__dirname + '/public', 'assets', 'bundle'),
-        filename: '[name].bundle.js'
+        path: path.resolve(__dirname, 'public', 'assets', 'bundle'),
+        filename: '[name]'
     },
     resolve: {
         extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
@@ -78,7 +80,10 @@ let config = {
         ibexApp: 'ibexApp',
     },
     plugins: [
-        new ExtractTextPlugin(path.join(__dirname + '/public', 'assets', 'bundle', 'css', 'app.css')),
+        new ExtractTextPlugin({
+            filename: 'bundle.css',
+            allChunks: true,
+        }),
         new webpack.DefinePlugin({
             '__DEV__' : JSON.stringify(true),
             '__API_HOST__' : JSON.stringify('http://http://ibex.localhost:8080/'),
