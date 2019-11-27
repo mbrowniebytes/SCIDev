@@ -12,35 +12,34 @@ class ViewDashboardAction extends DashboardAction
      */
     protected function action(): Response
     {
-        $page = <<< PAGE
-<!doctype html>
-<html lang="en">
-    <head>
-        <title>IBEX Dashboard</title>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/assets/bundle/bundle.css" type="text/css">
-    </head>
-    <script type="text/javascript">
-        let ibexApp = {
-            logged: true
-        };
-    </script>
-    <body>
-        Howdy
-
-        <div id="app"></div>
-
-        <script type="text/javascript" src="/assets/bundle/bundle.js" ></script>
-
-    </body>
-</html>
-PAGE;
+        /*
+        ● Top five dealerships by earn
+        ● Top five dealerships by customer base (count)
+        ● Top five customers by spend paired with their dealer name
+        ● Percentage total of qualifying customers with valid emails
+        ● Total count of Ibex customers
+         */
+        $dashboard = ['topDealersBySales' => [
+                ['dealer' => 'dealer 01', 'sales' => 1000],
+                ['dealer' => 'dealer 02', 'sales' => 1005],
+            ], 'topDealersByNumberCustomers' => [
+                ['dealer' => 'dealer 01', 'qty' => 5],
+                ['dealer' => 'dealer 02', 'qty' => 2],
+            ], 'topCustomersBySales' => [
+                ['customer' => 'customer 01', 'sales' => 55],
+                ['customer' => 'customer 02', 'sales' => 52],
+            ], 'customersWithValidEmails' => [
+                ['percentage' => '82'],
+            ], 'totalNumberOfCustomers' => [
+                ['qty' => 13],
+            ]
+        ];
+        $payload = json_encode($dashboard);
 
         $this->logger->info("Dashboard was viewed.");
 
-        $this->response->getBody()->write($page);
-        return $this->response;
+        $this->response->getBody()->write($payload);
+        return $this->response
+            ->withHeader('Content-Type', 'application/json');
     }
 }
