@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-use App\Application\Actions\Customer\ListCustomersAction;
-use App\Application\Actions\Customer\ListCustomerSalesAction;
-use App\Application\Actions\Customer\ViewCustomerAction;
-use App\Application\Actions\Customer\ViewCustomerSaleAction;
-use App\Application\Actions\Dashboard\ViewDashboardAction;
-use App\Application\Actions\Dealer\ListDealersAction;
-use App\Application\Actions\Dealer\ViewDealerAction;
+use App\Application\Actions\Api\Customer\ListCustomersAction;
+use App\Application\Actions\Api\Customer\ListCustomerSalesAction;
+use App\Application\Actions\Api\Customer\ViewCustomerAction;
+use App\Application\Actions\Api\Customer\ViewCustomerSaleAction;
+use App\Application\Actions\Front\ViewFrontAction;
+use App\Application\Actions\Api\Dealer\ListDealersAction;
+use App\Application\Actions\Api\Dealer\ViewDealerAction;
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\ViewUserAction;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -16,7 +16,12 @@ use Slim\App;
 use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 return function (App $app) {
-    $app->get('/', ViewDashboardAction::class);
+    $app->get('/', ViewFrontAction::class);
+    // TODO these should load appropriate component instead of just /
+    $app->get('/dashboard', ViewFrontAction::class);
+    $app->get('/dealers', ViewFrontAction::class);
+    $app->get('/settings', ViewFrontAction::class);
+    $app->get('/contact', ViewFrontAction::class);
 
     $app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
         $name = $args['name'];
