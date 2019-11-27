@@ -4,13 +4,13 @@ import ibexApp from 'ibexApp';
 export default class Dashboard extends Component {
     render() {
 
-        const { logged } = ibexApp;
+        const { testVar } = ibexApp;
 
         return (
             <Fragment>
                 <div className="dashboard">
-                    {logged &&
-                    <h2 className="status">Logged In</h2>
+                    {testVar &&
+                    <h2 className="status">testVar is true</h2>
                     }
                     <div>KPI 1</div>
                     <div>KPI 2</div>

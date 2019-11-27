@@ -86,7 +86,7 @@ let config = {
         }),
         new webpack.DefinePlugin({
             '__DEV__' : JSON.stringify(true),
-            '__API_HOST__' : JSON.stringify('http://http://ibex.localhost:8080/'),
+            '__API_HOST__' : JSON.stringify('http://ibex.localhost:8080/'),
         }),
     ],
 

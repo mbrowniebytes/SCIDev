@@ -24,7 +24,7 @@ class ViewFrontAction extends FrontAction
     </head>
     <script type="text/javascript">
         let ibexApp = {
-            logged: true
+            testVar: true
         };
     </script>
     <body>
