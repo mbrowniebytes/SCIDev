@@ -1,0 +1,13 @@
+
+
+
+.dealers {
+    background: #F0F0F0;
+}
+.dealers .card {
+    margin: 5px;
+}
+.dealers .card-title {
+    text-align: center;
+    font-weight: bold;
+}
