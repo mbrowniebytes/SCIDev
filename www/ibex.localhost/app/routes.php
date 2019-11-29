@@ -1,13 +1,18 @@
 <?php
 declare(strict_types=1);
 
-use App\Application\Actions\Api\Customer\ListCustomersAction;
-use App\Application\Actions\Api\Customer\ListCustomerSalesAction;
-use App\Application\Actions\Api\Customer\ViewCustomerAction;
-use App\Application\Actions\Api\Customer\ViewCustomerSaleAction;
+use App\Application\Actions\Api\Customer\ApiListCustomersAction;
+use App\Application\Actions\Api\Customer\ApiListCustomerSalesAction;
+use App\Application\Actions\Api\Customer\ApiViewCustomerAction;
+use App\Application\Actions\Api\Customer\ApiViewCustomerSaleAction;
+use App\Application\Actions\Customer\ExportCustomersAction;
+use App\Application\Actions\Customer\ListCustomersAction;
+use App\Application\Actions\Dashboard\ViewDashboardAction;
+use App\Application\Actions\Dealer\ListDealersAction;
+use App\Application\Actions\Dealer\ViewDealerAction;
 use App\Application\Actions\Front\ViewFrontAction;
-use App\Application\Actions\Api\Dealer\ListDealersAction;
-use App\Application\Actions\Api\Dealer\ViewDealerAction;
+use App\Application\Actions\Api\Dealer\ApiListDealersAction;
+use App\Application\Actions\Api\Dealer\ApiViewDealerAction;
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\ViewUserAction;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -20,6 +25,7 @@ return function (App $app) {
     // TODO these should load appropriate component instead of just /
     $app->get('/dashboard', ViewFrontAction::class);
     $app->get('/dealers', ViewFrontAction::class);
+    $app->get('/customers', ViewFrontAction::class);
     $app->get('/settings', ViewFrontAction::class);
     $app->get('/contact', ViewFrontAction::class);
 
@@ -34,15 +40,32 @@ return function (App $app) {
         $group->get('/{id}', ViewUserAction::class);
     });
 
-    $app->group('/api/dealers', function (Group $group) {
+    // data feeds for front end
+    $app->group('/data/dashboard', function (Group $group) {
+        $group->get('', ViewDashboardAction::class);
+    });
+
+    $app->group('/data/dealers', function (Group $group) {
         $group->get('', ListDealersAction::class);
-        $group->get('/{id}', ViewDealerAction::class);
+        //$group->get('/{id}', ViewDealerAction::class);
+    });
+
+    $app->group('/data/customers', function (Group $group) {
+        $group->get('', ListCustomersAction::class);
+        //$group->get('/{id}', ViewCustomerAction::class);
+        $group->post('/export', ExportCustomersAction::class);
+    });
+
+    // api to fetch and process csvs
+    $app->group('/api/dealers', function (Group $group) {
+        $group->get('', ApiListDealersAction::class);
+        $group->get('/{id}', ApiViewDealerAction::class);
     });
 
     $app->group('/api/customers/{dealerId}', function (Group $group) {
-        $group->get('', ListCustomersAction::class);
-        $group->get('/sales', ListCustomerSalesAction::class);
-        $group->get('/{id}', ViewCustomerAction::class);
-        $group->get('/sales/{id}', ViewCustomerSaleAction::class);
+        $group->get('', ApiListCustomersAction::class);
+        $group->get('/sales', ApiListCustomerSalesAction::class);
+        $group->get('/{id}', ApiViewCustomerAction::class);
+        $group->get('/sales/{id}', ApiViewCustomerSaleAction::class);
     });
 };
