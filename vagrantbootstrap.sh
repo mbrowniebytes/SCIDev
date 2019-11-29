@@ -91,7 +91,8 @@ sudo vi /etc/selinux/config
 sudo yum install npm nodejs
 sudo yum install yarn
 
-
+# pdo mysql
+sudo yum install php-mysqlnd
 
 
 
