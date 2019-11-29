@@ -12,27 +12,20 @@ class ViewDashboardAction extends DashboardAction
      */
     protected function action(): Response
     {
-        /*
-        ● Top five dealerships by earn
-        ● Top five dealerships by customer base (count)
-        ● Top five customers by spend paired with their dealer name
-        ● Percentage total of qualifying customers with valid emails
-        ● Total count of Ibex customers
-         */
+        // TODO read from db .. join dealer, customer, customer_sale
         $dashboard = ['topDealersBySales' => [
-                ['dealer' => 'dealer 01', 'sales' => 1000],
-                ['dealer' => 'dealer 02', 'sales' => 1005],
+                ['dealer' => 'dealer 01', 'sales' => '$'.number_format(3100.1, 2)],
+                ['dealer' => 'dealer 02', 'sales' => '$'.number_format(17110.05, 2)],
             ], 'topDealersByNumberCustomers' => [
                 ['dealer' => 'dealer 01', 'qty' => 5],
                 ['dealer' => 'dealer 02', 'qty' => 2],
             ], 'topCustomersBySales' => [
-                ['customer' => 'customer 01', 'sales' => 55],
-                ['customer' => 'customer 02', 'sales' => 52],
-            ], 'customersWithValidEmails' => [
-                ['percentage' => '82'],
-            ], 'totalNumberOfCustomers' => [
-                ['qty' => 13],
-            ]
+                ['customer' => 'customer 01', 'sales' => '$'.number_format(1255, 2)],
+                ['customer' => 'customer 02', 'sales' => '$'.number_format(152, 2)],
+            ], 'customersWithValidEmails' =>
+                ['percentage' => '82']
+            , 'totalNumberOfCustomers' =>
+                ['qty' => 13]
         ];
         $payload = json_encode($dashboard);
 

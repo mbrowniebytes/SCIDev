@@ -13,9 +13,11 @@ use Psr\Log\LoggerInterface;
 
 abstract class DealerAction extends Action
 {
+    protected $container;
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(LoggerInterface $logger, ContainerInterface $container)
     {
+        $this->container = $container;
         parent::__construct($logger);
     }
 

@@ -13,9 +13,11 @@ use Psr\Log\LoggerInterface;
 
 abstract class CustomerAction extends Action
 {
+    protected $container;
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(LoggerInterface $logger, ContainerInterface $container)
     {
+        $this->container = $container;
         parent::__construct($logger);
     }
 
@@ -27,6 +29,8 @@ abstract class CustomerAction extends Action
         // or curl .. meh
         // or a composer package like guzzle .. yeah
         // maybe also nice to model dealer array as a model OM
+
+        // could have used composer require league/csv
 
         $dealers = [];
         if (($h = fopen(__DIR__ . "/../../../../samples/Distinct Customers-Table 1.csv", "r")) !== false)

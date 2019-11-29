@@ -28,6 +28,8 @@ abstract class DealerAction extends Action
         // or a composer package like guzzle .. yeah
         // maybe also nice to model dealer array as a model OM
 
+        // could have used composer require league/csv
+
         $dealers = [];
         if (($h = fopen(__DIR__ . "/../../../../../samples/Distinct Dealerships-Dealerships.csv", "r")) !== false)
         {
