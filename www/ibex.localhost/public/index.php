@@ -32,6 +32,11 @@ $repositories($containerBuilder);
 // Build PHP-DI Container instance
 $container = $containerBuilder->build();
 
+// services
+$services = require __DIR__ . '/../app/services.php';
+$services($container);
+
+
 // Instantiate the app
 AppFactory::setContainer($container);
 $app = AppFactory::create();
