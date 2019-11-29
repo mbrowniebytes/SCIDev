@@ -6,7 +6,7 @@ namespace App\Application\Actions\Api\Customer;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Routing\RouteContext;
 
-class ListCustomerSalesAction extends CustomerAction
+class ApiListCustomerSalesAction extends CustomerAction
 {
     /**
      * {@inheritdoc}

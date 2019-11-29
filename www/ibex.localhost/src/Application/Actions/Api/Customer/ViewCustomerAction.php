@@ -5,7 +5,7 @@ namespace App\Application\Actions\Api\Customer;
 
 use Psr\Http\Message\ResponseInterface as Response;
 
-class ViewCustomerAction extends CustomerAction
+class ApiViewCustomerAction extends CustomerAction
 {
     /**
      * {@inheritdoc}

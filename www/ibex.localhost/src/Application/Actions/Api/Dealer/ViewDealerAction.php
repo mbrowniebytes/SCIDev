@@ -5,7 +5,7 @@ namespace App\Application\Actions\Api\Dealer;
 
 use Psr\Http\Message\ResponseInterface as Response;
 
-class ViewDealerAction extends DealerAction
+class ApiViewDealerAction extends DealerAction
 {
     /**
      * {@inheritdoc}
