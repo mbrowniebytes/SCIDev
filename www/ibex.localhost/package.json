@@ -23,6 +23,7 @@
     "react-hot-loader": "^4.6.3",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
+    "react-table": "^6.10.3",
     "semver": "^6.3.0"
   },
   "devDependencies": {
