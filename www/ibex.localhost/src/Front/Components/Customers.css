@@ -1,0 +1,13 @@
+
+
+
+.customers {
+    background: #F0F0F0;
+}
+.customers .card {
+    margin: 5px;
+}
+.customers .card-title {
+    text-align: center;
+    font-weight: bold;
+}
